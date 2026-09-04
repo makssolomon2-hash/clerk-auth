@@ -1,15 +1,24 @@
-import Link from 'next/link';
-import React from 'react'
+
+import Link from "next/link";
+import { Show, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
     <nav className="flex gap-8 text-lg">
-      <Link href={"/"}>Home</Link>
-      <Link href={"/dashboard"}>Dashboard</Link>
-      <Link href={"/about"}>About</Link>
-      <Link href={"/sign-in"}>Sign In</Link>
-    </nav>
-  )
-}
+      <Link href="/">Home</Link>
+      <Link href="/dashboard">Dashboard</Link>
+      <Link href="/about">About</Link>
 
-export default Navbar
+        <Show when="signed-in">
+        <UserButton />
+        </Show>
+
+        <Show when="signed-out">
+            <Link href="/sign-in">Sign In</Link>
+        </Show>
+    </nav>
+  );
+};
+
+export default Navbar;
+
